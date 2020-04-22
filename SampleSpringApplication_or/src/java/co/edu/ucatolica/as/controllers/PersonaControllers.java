@@ -127,8 +127,7 @@ public class PersonaControllers implements Controller {
     {      
         Logger.getLogger(PersonaControllers.class.getName()).log(Level.INFO, "Ejecutando processSubmit4...");
         return "persona_editar";
-    } 
-    
+    }  
 @RequestMapping(method = RequestMethod.POST, value = "personaEditarForm1.htm")
     public String processSubmit5(HttpServletRequest req, SessionStatus status,ModelMap model) 
     {
@@ -202,39 +201,29 @@ public class PersonaControllers implements Controller {
         return "persona_editar";
         
     }
-
+ 
     @RequestMapping(method = RequestMethod.GET, value = "personaEliminar.htm")
     public String processSubmit7(HttpServletRequest req, SessionStatus status,ModelMap model) 
     {      
         Logger.getLogger(PersonaControllers.class.getName()).log(Level.INFO, "Ejecutando processSubmit4...");
-        return "persona_eliminar";
-    } 
-    
-@RequestMapping(method = RequestMethod.POST, value = "personaEliminarForm.htm")
-    public String processSubmit8(HttpServletRequest req, SessionStatus status,ModelMap model) 
+        return "eliminar_persona";
+    }     
+    @RequestMapping(method = RequestMethod.POST, value = "personaEliminar1.htm")
+    public String processSubmit8(HttpServletRequest req, SessionStatus status,ModelMap model)
     {
-
+     
         FactoryDao MySqlFactory = FactoryDao.getFactory(FactoryDao.MYSQL_FACTORY);
-
-        //int id = pDao.obtenerId(MySqlDataSource.getConexionBD());
         String ident = req.getParameter("identificacion");
-        
-        
         Persona p = new Persona();
         //p.setId(id);
         p.setIdentificacion(ident);
-       
-            
-       boolean insert = MySqlFactory.getPersonaDao().eliminarPersona(p, MySqlDataSource.getConexionBD());
-       if(insert)
-            model.put("mensaje", "El registro fue eliminado satisfactoriamente");
-       else
-            model.put("mensaje", "El registro no fue eliminado");
-        
-        return "persona_eliminar";
-        
-    }    
-    
+      boolean insert = MySqlFactory.getPersonaDao().borrarpersona(p, MySqlDataSource.getConexionBD());
+       if (insert)
+            model.put("mensaje", "La persona fue borrada exitosamente");
+        else
+            model.put("mensaje", "no se pudo eliminar");
+       return "eliminar_persona";
+    }
     @Override
     public String value() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

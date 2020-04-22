@@ -61,7 +61,7 @@ public class PersonaMySQLDAO implements PersonaDAO{
 
     }
 
-     public ArrayList<Persona> consultarPersona(Persona p, Connection con)
+    public ArrayList<Persona> consultarPersona(Persona p, Connection con)
     {
         
         ArrayList<Persona> datos = new ArrayList();
@@ -71,7 +71,7 @@ public class PersonaMySQLDAO implements PersonaDAO{
         try {
             Statement s = con.createStatement();
             ResultSet rs = s.executeQuery ("select identificacion, nombre_1,nombre_2, "
-                    + " apellido_1, apellido_2, genero, telefono, email, "
+                    + " apellido_1, apellido_2, genero, telefono, email,"
                     + " fecha_nacimiento, tipo_persona"
                     + " from persona "
                     + " where "
@@ -119,11 +119,26 @@ public class PersonaMySQLDAO implements PersonaDAO{
                     + " identificacion=?"
                     + " , nombre_1=?"
                     + " , nombre_2=?"
-            );
+                    + " , apellido_1=?"
+                    + " , apellido_2=?"
+                    + " , genero=?"
+                    + " , telefono=?"
+                    + " , email=?"
+                    + " , fecha_nacimiento=?"
+                    + " , tipo_persona=?"
+                    +"WHERE identificacion="+p.getIdentificacion());
                         
             pstmt.setString(1, p.getIdentificacion());
             pstmt.setString(2, p.getNombre1());
             pstmt.setString(3, p.getNombre2());
+            pstmt.setString(4, p.getApellido1());
+            pstmt.setString(5, p.getApellido2());
+            pstmt.setString(6, p.getGenero());
+            pstmt.setString(7, p.getTelef());
+            pstmt.setString(8, p.getEmail());
+            pstmt.setString(9, p.getfNacimiento());
+            pstmt.setString(10, p.getTipoP());
+            
             
             pstmt.executeUpdate();
             
@@ -137,22 +152,19 @@ public class PersonaMySQLDAO implements PersonaDAO{
         return respuesta;
 
     }
-    public boolean eliminarPersona(Persona p, Connection con)
+    public boolean borrarpersona(Persona p, Connection con)
     {
-        PreparedStatement pstmt = null;
-        boolean respuesta = false;
-        try {            
-            
-            
-            pstmt = con.prepareStatement("delete from persona where identificacion="+p.getIdentificacion()); 
+       PreparedStatement pstmt = null;
+       boolean respuesta = false;
+        try {
+            pstmt = con.prepareStatement("delete from persona where identificacion="+p.getIdentificacion());
             pstmt.executeUpdate();
-            con.close();
-            respuesta = true;
+            
         } catch (SQLException ex) {
             Logger.getLogger(PersonaMySQLDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return respuesta;
-
+       respuesta=true;
+       return respuesta;
     }
+
 }
