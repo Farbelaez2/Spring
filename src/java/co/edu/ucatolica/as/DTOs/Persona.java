@@ -42,7 +42,8 @@ public class Persona {
 /*
     prueba
     fefe
-    */
+*/
+    
     public String getNombre1() {
         return nombre1;
     }

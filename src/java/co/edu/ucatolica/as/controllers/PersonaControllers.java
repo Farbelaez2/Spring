@@ -103,7 +103,9 @@ public class PersonaControllers implements Controller {
         //int id = pDao.obtenerId(MySqlDataSource.getConexionBD());
         String ident = req.getParameter("identificacion");
         String nombre1 = req.getParameter("nombre1");
-        
+        /*
+        comentario
+        */
         Persona p = new Persona();
         //p.setId(id);
         p.setIdentificacion(ident);
