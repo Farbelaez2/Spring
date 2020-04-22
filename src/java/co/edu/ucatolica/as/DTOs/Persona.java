@@ -41,6 +41,7 @@ public class Persona {
     
 /*
     prueba
+    fefe
     */
     public String getNombre1() {
         return nombre1;
@@ -89,7 +90,7 @@ public class Persona {
     public void setTipoP(String tipoP) {
         this.tipoP = tipoP;
     }
-
+    
     public String getfNacimiento() {
         return fNacimiento;
     }
