@@ -14,8 +14,4 @@ import java.util.ArrayList;
  * @author sala5
  */
 public interface PersonaDAO {
-    public boolean crearPersona(Persona p, Connection con);
-    public ArrayList<Persona> consultarPersona(Persona p, Connection con);
-    public boolean editarPersona(Persona p, Connection con);
-    public boolean borrarpersona(Persona p, Connection con);
 }
